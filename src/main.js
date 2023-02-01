@@ -1,19 +1,62 @@
 let symbols = [
   { symbol: "ball", value: 10 },
-  { symbol: "cards", value: 10 },
-  { symbol: "coin", value: 5 },
-  { symbol: "control", value: 3 },
-  { symbol: "dices", value: 3 },
-  { symbol: "man", value: 3 },
-  { symbol: "roulette", value: 3 },
+  { symbol: "cards", value: 9 },
+  { symbol: "coin", value: 8 },
+  { symbol: "control", value: 7 },
+  { symbol: "dices", value: 6 },
+  { symbol: "man", value: 5 },
+  { symbol: "roulette", value: 4 },
   { symbol: "slotmachinecherry", value: 3 },
   { symbol: "slotmachineseven", value: 1 },
 ];
 
 let totalValue = symbols.reduce((acc, symbol) => acc + symbol.value, 0);
 
+  // SIMULAÇÃO DE PROBABILIDADES
+
+let symbolCount = {};
+for (let symbol of symbols) {
+  symbolCount[symbol.symbol] = 0;
+}
+
+let numberOfSimulations = 500;
+
+for (let i = 0; i < numberOfSimulations; i++) {
+  let randomNumber = Math.floor(Math.random() * totalValue);
+  let sum = 0;
+  for (let symbol of symbols) {
+    sum += symbol.value;
+    if (randomNumber < sum) {
+      symbolCount[symbol.symbol]++;
+      break;
+    }
+  }
+}
+
+for (let symbol of symbols) {
+  let probability = symbolCount[symbol.symbol] / numberOfSimulations;
+  console.log(`A probabilidade de ganhar o símbolo ${symbol.symbol} é de ${probability}.`);
+}
+
+// FIM DA SIMULAÇÃO DE PROBABILIDADES
+
+let lastRandomNumber;
+
+function getRandomSymbolForSpinning() {
+  let randomNumber = Math.floor(Math.random() * totalValue);
+  return symbols[randomNumber % symbols.length].symbol;
+}
+
 function getRandomSymbol() {
   let randomNumber = Math.floor(Math.random() * totalValue);
+
+  console.log("lastRandomNumber:", lastRandomNumber, symbol);
+  console.log("randomNumber:", randomNumber, symbol);
+
+  while (randomNumber === lastRandomNumber) {
+    randomNumber = Math.floor(Math.random() * totalValue);
+  }
+  lastRandomNumber = randomNumber;
   let sum = 0;
   for (let symbol of symbols) {
     sum += symbol.value;
@@ -37,7 +80,7 @@ spinButton.addEventListener("click", function () {
   let spinInterval = 50;
 
   let spinTimer = setInterval(function () {
-    symbol.src = "./assets/img/" + getRandomSymbol() + ".png";
+    symbol.src = "./assets/img/" + getRandomSymbolForSpinning() + ".png";
     sound1.play();
 
     if (performance.now() - spinStart >= spinDuration) {

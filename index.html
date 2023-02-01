@@ -12,27 +12,37 @@
     <title>Slot Machine</title>
 </head>
 <body onload="setSection()">
-    <section id="default">
-      <div class="button-default-section" id="play-slide-show">
-        <h2>
-          ABOUT US
-        </h2>
-      </div>
-      <div class="button-default-section" id="play-game">
-        <h2>
-          PLAY
-        </h2>
-      </div>
-    </section>
-    <section id="slot-machine">
-      <div class="slot">
-        <img src="./assets/img/default.png" id="symbol">
-      </div>
-      <button class="spin-button">Spin</button>
-    </section>
+
+  <!-- MAIN/CHOICES SECTION -->
+
+  <section id="default">
+    <div class="button-default-section" id="play-slide-show">
+      <h2>
+        ABOUT US
+      </h2>
+    </div>
+    <div class="button-default-section" id="play-game">
+      <h2>
+        PLAY
+      </h2>
+    </div>
+  </section>
+
+    <!-- SLOT MACHINE SECTION  -->
+
+  <section id="slot-machine">
+    <div class="slot">
+      <img src="./assets/img/default.png" id="symbol">
+    </div>
+    <button class="spin-button">Spin</button>
+  </section>
+
+    <!-- SLIDE SHOW SECTION  -->
+
   <section id="slide-show">
     <div id="carouselExample" class="carousel slide carousel-fade">
       <div class="carousel-inner">
+        <!-- CRIANDO FILHOS A PARTIR DE JS -->
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,6 +54,9 @@
       </button>
     </div>
   </section>
+
+  <!-- VIDEO STANDBY SECTION  -->
+
   <section id="video-standby">
 
   </section>

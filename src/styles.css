@@ -42,11 +42,12 @@ body {
     height: 100%;
     align-items: center;
     flex-direction: column;
+    background-color: black;
 }
 
 .slot {
-    height: 25em;
-    width: 25em;
+    height: 30em;
+    width: 30em;
     overflow: hidden;
     position: relative;
     border: none;
@@ -63,6 +64,12 @@ body {
 
 .spin {
     animation: spin 0.2s linear infinite;
+}
+
+.spin-button {
+    padding: 1em;
+    border-radius: 0.5em;
+    font-size: 1.5em;
 }
 
 

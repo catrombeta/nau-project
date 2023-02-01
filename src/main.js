@@ -49,6 +49,10 @@ spinButton.addEventListener("click", function () {
   }, spinInterval);
 });
 
+// function createButton(section) {
+//   $(section).append(`<button class="close-button" type="button"><img src="./assets/img/close-button.png" id="icon-close-button" /></button>`);
+// }
+
 
 const buttonPlay = $("#play-game");
 const buttonSlideShow = $("#play-slide-show");
@@ -56,19 +60,24 @@ const buttonSlideShow = $("#play-slide-show");
 const slotMachineSection = $("#slot-machine");
 const defaultSection = $("#default");
 const slideShowSection = $("#slide-show");
+const videoStandBySection = $("#video-standby");
 
 
 function setSection() {
   buttonPlay.on("click", function () {
+    // createButton(slotMachineSection);
     slotMachineSection.css("display", "show");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "none");
+    videoStandBySection.css("display", "none");
   });
 
   buttonSlideShow.on("click", function () {
+    // createButton(slideShowSection);
     slotMachineSection.css("display", "none");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "show");
+    videoStandBySection.css("display", "none");
   });
 }
 

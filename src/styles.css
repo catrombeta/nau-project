@@ -7,6 +7,10 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+#icon-close-button {
+    width: 2em;
+}
+
 /* DEFAULT SECTION  */
 
 #default {

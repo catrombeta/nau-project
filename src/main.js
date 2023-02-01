@@ -82,3 +82,19 @@ function setSection() {
 }
 
 
+// SLIDESHOW
+
+const carouselInner = $('.carousel-inner');
+const basePath = './assets/img/slide-show/';
+
+for (let i = 1; i <= 30; i++) {
+  const carouselItem = $('<div>').addClass('carousel-item');
+
+  const image = $('<img>').attr('src', `${basePath}${i}.jpg`)
+    .addClass('d-block');
+
+  carouselItem.append(image);
+  carouselInner.append(carouselItem);
+}
+
+$('.carousel-item').first().addClass('active');

@@ -1,18 +1,18 @@
 let symbols = [
-  { symbol: "ball", value: 10 },
-  { symbol: "cards", value: 9 },
-  { symbol: "coin", value: 8 },
-  { symbol: "control", value: 7 },
-  { symbol: "dices", value: 6 },
-  { symbol: "man", value: 5 },
-  { symbol: "roulette", value: 4 },
+  { symbol: "ball", value: 60 },
+  { symbol: "cards", value: 60 },
+  { symbol: "coin", value: 40 },
+  { symbol: "control", value: 30 },
+  { symbol: "dices", value: 20 },
+  { symbol: "man", value: 10 },
+  { symbol: "roulette", value: 5 },
   { symbol: "slotmachinecherry", value: 3 },
   { symbol: "slotmachineseven", value: 1 },
 ];
 
 let totalValue = symbols.reduce((acc, symbol) => acc + symbol.value, 0);
 
-  // SIMULAÇÃO DE PROBABILIDADES
+// SIMULAÇÃO DE PROBABILIDADES
 
 let symbolCount = {};
 for (let symbol of symbols) {
@@ -40,29 +40,29 @@ for (let symbol of symbols) {
 
 // FIM DA SIMULAÇÃO DE PROBABILIDADES
 
-let lastRandomNumber;
+let lastSymbol;
 
 function getRandomSymbolForSpinning() {
   let randomNumber = Math.floor(Math.random() * totalValue);
   return symbols[randomNumber % symbols.length].symbol;
 }
 
+
 function getRandomSymbol() {
   let randomNumber = Math.floor(Math.random() * totalValue);
-
-  console.log("lastRandomNumber:", lastRandomNumber, symbol);
-  console.log("randomNumber:", randomNumber, symbol);
-
-  while (randomNumber === lastRandomNumber) {
-    randomNumber = Math.floor(Math.random() * totalValue);
-  }
-  lastRandomNumber = randomNumber;
   let sum = 0;
   for (let symbol of symbols) {
     sum += symbol.value;
     if (randomNumber < sum) {
+      if (symbol.symbol === lastSymbol) {
+        console.log("Símbolo repetido, gerando novo");
+        return getRandomSymbol();
+      }
+      lastSymbol = symbol.symbol;
       return symbol.symbol;
     }
+    // console.log("lastSymbol:", lastSymbol);
+    // console.log("symbol:", symbol);
   }
 }
 
@@ -91,6 +91,8 @@ spinButton.addEventListener("click", function () {
     }
   }, spinInterval);
 });
+
+
 
 // function createButton(section) {
 //   $(section).append(`<button class="close-button" type="button"><img src="./assets/img/close-button.png" id="icon-close-button" /></button>`);
@@ -141,3 +143,11 @@ for (let i = 1; i <= 30; i++) {
 }
 
 $('.carousel-item').first().addClass('active');
+
+// BUTTON CLOSE
+
+let buttonClose = $('.button-close');
+
+$(buttonClose).on('click', function() {
+  if (buttonClose)
+})

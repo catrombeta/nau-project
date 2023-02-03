@@ -147,7 +147,3 @@ $('.carousel-item').first().addClass('active');
 // BUTTON CLOSE
 
 let buttonClose = $('.button-close');
-
-$(buttonClose).on('click', function() {
-  if (buttonClose)
-})

@@ -115,10 +115,12 @@ function setStandbyTimeout() {
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "block");
     console.log("VÍDEO DE STANDBY ATIVADO");
-  }, 15000);
+  }, 5000);
 }
 
 document.addEventListener("click", function (e) {
+  clearTimeout(timeoutId);
+
   if (e.target.id === "play-game") {
     slotMachineSection.css("display", "flex");
     defaultSection.css("display", "none");
@@ -132,14 +134,25 @@ document.addEventListener("click", function (e) {
     defaultSection.css("display", "none");
     slideShowSection.css("display", "block");
     videoStandBySection.css("display", "none");
+    console.log("SLIDESHOW ATIVADO");
   }
 
-  // if (e.target.id !== "play-game" && e.target.id !== "play-slide-show") {
-  //   defaultSection.css("display", "flex");
-  //   slotMachineSection.css("display", "none");
-  //   slideShowSection.css("display", "none");
-  //   videoStandBySection.css("display", "none");
-  // }
+  if (e.target.id === "video") {
+    defaultSection.css("display", "flex");
+    slotMachineSection.css("display", "none");
+    slideShowSection.css("display", "none");
+    videoStandBySection.css("display", "none");
+    console.log("VÍDEO DE STANDBY DESATIVADO");
+  }
+
+  timeoutId = setTimeout(function () {
+    slotMachineSection.css("display", "none");
+    defaultSection.css("display", "none");
+    slideShowSection.css("display", "none");
+    videoStandBySection.css("display", "block");
+    console.log("VÍDEO DE STANDBY ATIVADO");
+  }, 2000);
+
 
   setStandbyTimeout();
 });

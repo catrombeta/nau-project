@@ -133,6 +133,7 @@ document.addEventListener("click", function (e) {
     slotMachineSection.css("display", "none");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "block");
+    createCarouselItem();
     videoStandBySection.css("display", "none");
     console.log("SLIDESHOW ATIVADO");
   }
@@ -149,6 +150,7 @@ document.addEventListener("click", function (e) {
     slotMachineSection.css("display", "none");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "none");
+    createCarouselItem();
     videoStandBySection.css("display", "block");
     console.log("VÍDEO DE STANDBY ATIVADO");
   }, 2000);
@@ -159,21 +161,28 @@ document.addEventListener("click", function (e) {
 
 // SLIDESHOW
 
-const carouselInner = $(".carousel-inner");
-const basePath = "./assets/img/slide-show/";
-
-for (let i = 1; i <= 30; i++) {
-  const carouselItem = $("<div>").addClass("carousel-item");
-
-  const image = $("<img>")
-    .attr("src", `${basePath}${i}.jpg`)
-    .addClass("d-block");
-
-  carouselItem.append(image);
-  carouselInner.append(carouselItem);
+function createCarouselItem() {
+  const carouselInner = $(".carousel-inner");
+  const basePath = "./assets/img/slide-show/";
+  
+  if (slideShowSection.css("display", "block")) {
+    for (let i = 1; i <= 30; i++) {
+      const carouselItem = $("<div>").addClass("carousel-item");
+    
+      const image = $("<img>")
+        .attr("src", `${basePath}${i}.jpg`)
+        .addClass("d-block");
+    
+      carouselItem.append(image);
+      carouselInner.append(carouselItem);
+    }
+    
+    $(".carousel-item").first().addClass("active");
+  } else {
+    $(carouselInner).empty();
+    console.log('NÃO ESTÁ FUNCIONANDO ESTA PARTE!!!!!!!!!!!!!!!!')
+  }
 }
-
-$(".carousel-item").first().addClass("active");
 
 // BUTTON CLOSE
 

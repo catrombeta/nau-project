@@ -81,13 +81,13 @@ spinButton.addEventListener("click", function () {
 
   let spinTimer = setInterval(function () {
     symbol.src = "./assets/img/" + getRandomSymbolForSpinning() + ".png";
-    sound1.play();
+    // sound1.play();
 
     if (performance.now() - spinStart >= spinDuration) {
       clearInterval(spinTimer);
       symbol.src = "./assets/img/" + getRandomSymbol() + ".png";
       symbol.parentElement.classList.remove("spin");
-      sound2.play();
+      // sound2.play();
     }
   }, spinInterval);
 });
@@ -147,3 +147,16 @@ $('.carousel-item').first().addClass('active');
 // BUTTON CLOSE
 
 let buttonClose = $('.button-close');
+
+// STANDBY VIDEO
+
+let timer;
+
+$(document).on("click", function() {
+  clearTimeout(timer);
+  $(videoStandBySection).get(0).pause();
+  
+  timer = setTimeout(function() {
+    $(videoStandBySection).get(0).play();
+  }, 60000); // tempo de espera de 3 segundos
+});

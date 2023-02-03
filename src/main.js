@@ -14,29 +14,29 @@ let totalValue = symbols.reduce((acc, symbol) => acc + symbol.value, 0);
 
 // SIMULAÇÃO DE PROBABILIDADES
 
-let symbolCount = {};
-for (let symbol of symbols) {
-  symbolCount[symbol.symbol] = 0;
-}
+// let symbolCount = {};
+// for (let symbol of symbols) {
+//   symbolCount[symbol.symbol] = 0;
+// }
 
-let numberOfSimulations = 500;
+// let numberOfSimulations = 500;
 
-for (let i = 0; i < numberOfSimulations; i++) {
-  let randomNumber = Math.floor(Math.random() * totalValue);
-  let sum = 0;
-  for (let symbol of symbols) {
-    sum += symbol.value;
-    if (randomNumber < sum) {
-      symbolCount[symbol.symbol]++;
-      break;
-    }
-  }
-}
+// for (let i = 0; i < numberOfSimulations; i++) {
+//   let randomNumber = Math.floor(Math.random() * totalValue);
+//   let sum = 0;
+//   for (let symbol of symbols) {
+//     sum += symbol.value;
+//     if (randomNumber < sum) {
+//       symbolCount[symbol.symbol]++;
+//       break;
+//     }
+//   }
+// }
 
-for (let symbol of symbols) {
-  let probability = symbolCount[symbol.symbol] / numberOfSimulations;
-  console.log(`A probabilidade de ganhar o símbolo ${symbol.symbol} é de ${probability}.`);
-}
+// for (let symbol of symbols) {
+//   let probability = symbolCount[symbol.symbol] / numberOfSimulations;
+//   console.log(`A probabilidade de ganhar o símbolo ${symbol.symbol} é de ${probability}.`);
+// }
 
 // FIM DA SIMULAÇÃO DE PROBABILIDADES
 
@@ -46,7 +46,6 @@ function getRandomSymbolForSpinning() {
   let randomNumber = Math.floor(Math.random() * totalValue);
   return symbols[randomNumber % symbols.length].symbol;
 }
-
 
 function getRandomSymbol() {
   let randomNumber = Math.floor(Math.random() * totalValue);
@@ -81,82 +80,113 @@ spinButton.addEventListener("click", function () {
 
   let spinTimer = setInterval(function () {
     symbol.src = "./assets/img/" + getRandomSymbolForSpinning() + ".png";
-    // sound1.play();
+    sound1.play();
 
     if (performance.now() - spinStart >= spinDuration) {
       clearInterval(spinTimer);
       symbol.src = "./assets/img/" + getRandomSymbol() + ".png";
       symbol.parentElement.classList.remove("spin");
-      // sound2.play();
+      sound2.play();
     }
   }, spinInterval);
 });
 
-
-
-// function createButton(section) {
-//   $(section).append(`<button class="close-button" type="button"><img src="./assets/img/close-button.png" id="icon-close-button" /></button>`);
-// }
-
+// SET SECTIONS
 
 const buttonPlay = $("#play-game");
 const buttonSlideShow = $("#play-slide-show");
-
 const slotMachineSection = $("#slot-machine");
 const defaultSection = $("#default");
 const slideShowSection = $("#slide-show");
 const videoStandBySection = $("#video-standby");
 
+slotMachineSection.css("display", "none");
+defaultSection.css("display", "flex");
+slideShowSection.css("display", "none");
+videoStandBySection.css("display", "none");
 
-function setSection() {
-  buttonPlay.on("click", function () {
-    // createButton(slotMachineSection);
-    slotMachineSection.css("display", "show");
+let timeoutId;
+
+function setStandbyTimeout() {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(function () {
+    slotMachineSection.css("display", "none");
+    defaultSection.css("display", "none");
+    slideShowSection.css("display", "none");
+    videoStandBySection.css("display", "block");
+    console.log("VÍDEO DE STANDBY ATIVADO");
+  }, 15000);
+}
+
+document.addEventListener("click", function (e) {
+  if (e.target.id === "play-game") {
+    slotMachineSection.css("display", "flex");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "none");
-  });
+    console.log("BOTÃO DE JOGO CLICADO");
+  }
 
-  buttonSlideShow.on("click", function () {
-    // createButton(slideShowSection);
+  if (e.target.id === "play-slide-show") {
     slotMachineSection.css("display", "none");
     defaultSection.css("display", "none");
-    slideShowSection.css("display", "show");
+    slideShowSection.css("display", "block");
     videoStandBySection.css("display", "none");
-  });
-}
+  }
 
+  // if (e.target.id !== "play-game" && e.target.id !== "play-slide-show") {
+  //   defaultSection.css("display", "flex");
+  //   slotMachineSection.css("display", "none");
+  //   slideShowSection.css("display", "none");
+  //   videoStandBySection.css("display", "none");
+  // }
+
+  setStandbyTimeout();
+});
 
 // SLIDESHOW
 
-const carouselInner = $('.carousel-inner');
-const basePath = './assets/img/slide-show/';
+const carouselInner = $(".carousel-inner");
+const basePath = "./assets/img/slide-show/";
 
 for (let i = 1; i <= 30; i++) {
-  const carouselItem = $('<div>').addClass('carousel-item');
+  const carouselItem = $("<div>").addClass("carousel-item");
 
-  const image = $('<img>').attr('src', `${basePath}${i}.jpg`)
-    .addClass('d-block');
+  const image = $("<img>")
+    .attr("src", `${basePath}${i}.jpg`)
+    .addClass("d-block");
 
   carouselItem.append(image);
   carouselInner.append(carouselItem);
 }
 
-$('.carousel-item').first().addClass('active');
+$(".carousel-item").first().addClass("active");
 
 // BUTTON CLOSE
 
-let buttonClose = $('.button-close');
+let buttonClose = $(".button-close");
 
-// STANDBY VIDEO
+// $(buttonClose).on('click', function() {
+//   if (buttonClose)
+// })
 
-let timer;
+// STANDBY
 
-$(document).on("click", function() {
-  clearTimeout(timer);
-  $(videoStandBySection).get(0).pause();
-  
-  timer = setTimeout(function() {
-    $(videoStandBySection).get(0).play();
-  }, 60000); // tempo de espera de 3 segundos
-});
+// $(document).ready(function() {
+//   var timeoutId;
+//   var video = $("#standby-video")[0];
+
+//   function resetTimer() {
+//     clearTimeout(timeoutId);
+//     timeoutId = setTimeout(function() {
+//       video.play();
+//     }, 3000); // 5 minutos em milissegundos
+//   }
+
+//   $(document).mousemove(resetTimer);
+
+//   video.addEventListener("ended", function() {
+//     this.currentTime = 0;
+//     this.pause();
+//   });
+// });

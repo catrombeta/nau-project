@@ -117,3 +117,16 @@ span {
     width: 100%;
     height: 100vh;
 }
+
+/* STANDBY VIDEO SECTION */
+
+#video-standby {
+    height: 100vh;
+    width: 100vw;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

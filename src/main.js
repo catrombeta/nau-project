@@ -74,7 +74,7 @@ let sound2 = new Audio("./assets/sounds/win.wav");
 spinButton.addEventListener("click", function () {
   symbol.parentElement.classList.add("spin");
 
-  let spinDuration = 4000;
+  let spinDuration = 3000;
   let spinStart = performance.now();
   let spinInterval = 50;
 
@@ -106,6 +106,7 @@ slideShowSection.css("display", "none");
 videoStandBySection.css("display", "none");
 
 let timeoutId;
+const seconds = 15000;
 
 function setStandbyTimeout() {
   clearTimeout(timeoutId);
@@ -115,7 +116,7 @@ function setStandbyTimeout() {
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "block");
     console.log("VÍDEO DE STANDBY ATIVADO");
-  }, 5000);
+  }, seconds);
 }
 
 document.addEventListener("click", function (e) {
@@ -150,10 +151,9 @@ document.addEventListener("click", function (e) {
     slotMachineSection.css("display", "none");
     defaultSection.css("display", "none");
     slideShowSection.css("display", "none");
-    createCarouselItem();
     videoStandBySection.css("display", "block");
     console.log("VÍDEO DE STANDBY ATIVADO");
-  }, 2000);
+  }, seconds);
 
 
   setStandbyTimeout();
@@ -164,23 +164,23 @@ document.addEventListener("click", function (e) {
 function createCarouselItem() {
   const carouselInner = $(".carousel-inner");
   const basePath = "./assets/img/slide-show/";
-  
-  if (slideShowSection.css("display", "block")) {
+
+  if (carouselInner.children().length === 0) {
     for (let i = 1; i <= 30; i++) {
       const carouselItem = $("<div>").addClass("carousel-item");
-    
+
       const image = $("<img>")
         .attr("src", `${basePath}${i}.jpg`)
         .addClass("d-block");
-    
+
       carouselItem.append(image);
       carouselInner.append(carouselItem);
     }
-    
     $(".carousel-item").first().addClass("active");
+
   } else {
-    $(carouselInner).empty();
-    console.log('NÃO ESTÁ FUNCIONANDO ESTA PARTE!!!!!!!!!!!!!!!!')
+    $(".carousel-item").removeClass("active");
+    $(".carousel-item").first().addClass("active");
   }
 }
 

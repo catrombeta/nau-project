@@ -1,6 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
 body {
     text-align: center;
-    box-sizing: border-box;
     height: 100vh;
     width: 100%;
     margin: 0;
@@ -104,26 +111,29 @@ span {
 
 /* SLIDE SHOW SECTION */
 
-#slide-show {
+#slide-show, #video-standby {
     width: 100%;
     height: 100vh !important;
 }
 
 .carousel {
-    height: 90% !important;
+    height: 100% !important;
 }
+
 
 .carousel-item img {
     width: 100%;
     height: 100vh;
+    object-fit: cover;
 }
 
 /* STANDBY VIDEO SECTION */
 
-#video-standby {
+/* #video-standby {
     height: 100vh;
     width: 100vw;
-}
+    box-sizing: border-box;
+} */
 
 video {
     width: 100%;

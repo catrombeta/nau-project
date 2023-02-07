@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./src/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="./src/styles.css" />
-    <script src="./src/jquery/jquery-3.6.1.min.js"></script>
-    <script src="./src/bootstrap/js/bootstrap.min.js"></script>
-    <script defer src="./src/main.js"></script>
-    <title>Slot Machine</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./src/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./src/styles.css" />
+  <script src="./src/jquery/jquery-3.6.1.min.js"></script>
+  <script src="./src/bootstrap/js/bootstrap.min.js"></script>
+  <script defer src="./src/main.js"></script>
+  <title>Slot Machine</title>
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
   <section id="slot-machine">
     <span>
-      <!-- <img src="./assets/img/close-button.png" class="close-button" id="close-button-slot" /> -->
+      <img src="./assets/img/close-button.png" class="close-button" id="close-button-slot" />
     </span>
     <div class="slot">
       <img src="./assets/img/default.png" id="symbol">
@@ -45,7 +45,7 @@
   <section id="slide-show">
     <!-- <span><img src="./assets/img/close-button.png" class="closeButton" id="close-button-slide" /></span> -->
 
-    <div id="carouselExample" class="carousel slide carousel-fade">
+    <div id="carouselExample" class="carousel slide carousel-fade h-100">
       <div class="carousel-inner">
         <!-- CRIANDO FILHOS A PARTIR DE JS -->
       </div>
@@ -63,8 +63,9 @@
   <!-- VIDEO STANDBY SECTION  -->
 
   <section id="video-standby">
-    <video src="./assets/video/video.mp4" id="video" loop muted autoplay></video>
+    <video id="video" loop muted autoplay>
+      <source src="./assets/video/video.mp4"/>
+    </video>
   </section>
-  <script src="./src/main.js"></script>
 </body>
 </html>

@@ -1,71 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-pt">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./src/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="./src/styles.css" />
-  <script src="./src/jquery/jquery-3.6.1.min.js"></script>
-  <script src="./src/bootstrap/js/bootstrap.min.js"></script>
-  <script defer src="./src/main.js"></script>
-  <title>Slot Machine</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="./src/bootstrap/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="./src/styles.css" />
+    <script src="./src/jquery/jquery-3.6.1.min.js"></script>
+    <script src="./src/bootstrap/js/bootstrap.min.js"></script>
+    <script defer src="./src/main.js"></script>
+    <title>Slot Machine</title>
+  </head>
+  <body>
+    <!-- MAIN/CHOICES SECTION -->
 
-  <!-- MAIN/CHOICES SECTION -->
+    <section id="default">
+      <div class="row d-inline-block">
+        <div class="col-12">
+          <span id="pt-button">PT</span>
+          <span id="en-button">EN</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="button-default-section" id="play-slide-show"></div>
+        </div>
+        <div class="col-6">
+          <div class="button-default-section" id="play-game" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></div>
+        </div>
 
-  <section id="default">
-    <div class="button-default-section" id="play-slide-show">
-      <h2>
-        ABOUT US
-      </h2>
-    </div>
-    <div class="button-default-section" id="play-game">
-      <h2>
-        PLAY
-      </h2>
-    </div>
-  </section>
+      </div>
+    </section>
 
     <!-- SLOT MACHINE SECTION  -->
 
-  <section id="slot-machine">
-    <span>
-      <img src="./assets/img/close-button.png" class="close-button" id="close-button-slot" />
-    </span>
-    <div class="slot">
-      <img src="./assets/img/default.png" id="symbol">
-    </div>
-    <button class="spin-button">Spin</button>
-  </section>
+    <section id="slot-machine">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="resultModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="resultModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <span id="modalResult"></span>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-close"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slot">
+        <img src="./assets/img/default.png" id="symbol" />
+      </div>
+      <button class="spin-button"></button>
+    </section>
 
     <!-- SLIDE SHOW SECTION  -->
 
-  <section id="slide-show">
-    <!-- <span><img src="./assets/img/close-button.png" class="closeButton" id="close-button-slide" /></span> -->
+    <section id="slide-show">
+      <!-- <span><img src="./assets/img/close-button.png" class="closeButton" id="close-button-slide" /></span> -->
 
-    <div id="carouselExample" class="carousel slide carousel-fade h-100">
-      <div class="carousel-inner">
-        <!-- CRIANDO FILHOS A PARTIR DE JS -->
+      <div id="carouselExample" class="carousel slide carousel-fade h-100">
+        <div class="carousel-inner">
+          <!-- CRIANDO FILHOS A PARTIR DE JS -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </section>
+    </section>
 
-  <!-- VIDEO STANDBY SECTION  -->
+    <!-- VIDEO STANDBY SECTION  -->
 
-  <section id="video-standby">
-    <video id="video" loop muted autoplay>
-      <source src="./assets/video/video.mp4"/>
-    </video>
-  </section>
-</body>
+    <section id="video-standby">
+      <video id="video" loop muted autoplay>
+        <source src="./assets/video/video.mp4" />
+      </video>
+    </section>
+  </body>
 </html>

@@ -1,6 +1,61 @@
+function setDefaultLanguage(language) {
+  if (localStorage.getItem('language') === null) {
+    localStorage.setItem('language', language);
+  }
+  changeLanguage(localStorage.getItem('language'));
+}
+
+const languages = {
+  pt: {
+    defaultButtonAbout: "Sobre Nós",
+    defaultButtonPlay: "Jogar",
+    slotMachineButton: "Rodar",
+    modalButtonClose: "Voltar ao início",
+    modalBody: `O símbolo sorteado foi:`
+  },
+  en: {
+    defaultButtonAbout: "About Us",
+    defaultButtonPlay: "Play",
+    slotMachineButton: "Spin",
+    modalButtonClose: "Back",
+    modalBody: `The symbol drawn was:`
+  }
+}
+
+let currentLanguage = "en";
+changeLanguage(currentLanguage);
+
+$('#pt-button').on('click', function () {
+  if (currentLanguage !== "pt") {
+    currentLanguage = "pt";
+    changeLanguage(currentLanguage);
+    }
+})
+
+$('#en-button').on('click', function () {
+  if (currentLanguage !== "en") {
+    currentLanguage = "en";
+    changeLanguage(currentLanguage);
+    }
+})
+
+function changeLanguage(language) {
+  const languageData = languages[language];
+  // document.getElementById("message").innerHTML = languageData.message;
+
+  // DEFAULT
+  $('#play-slide-show').text(languageData.defaultButtonAbout);
+  $('#play-game').text(languageData.defaultButtonPlay);
+
+  // SLOT MACHINE
+  $('.spin-button').text(languageData.slotMachineButton);
+  $('#modal-close').text(languageData.modalButtonClose);
+  $('.modal-body').text(languageData.modalBody);
+}
+
 let symbols = [
   { symbol: "ball", value: 60 },
-  { symbol: "cards", value: 60 },
+  { symbol: "cards", value: 50 },
   { symbol: "coin", value: 40 },
   { symbol: "control", value: 30 },
   { symbol: "dices", value: 20 },
@@ -53,20 +108,34 @@ function getRandomSymbol() {
   for (let symbol of symbols) {
     sum += symbol.value;
     if (randomNumber < sum) {
-      if (symbol.symbol === lastSymbol) {
-        console.log("Símbolo repetido, gerando novo");
-        return getRandomSymbol();
-      }
-      lastSymbol = symbol.symbol;
+      console.log("symbol:", symbol);
       return symbol.symbol;
     }
     // console.log("lastSymbol:", lastSymbol);
-    // console.log("symbol:", symbol);
   }
 }
 
+
+// function getRandomSymbol() {
+//   let randomNumber = Math.floor(Math.random() * totalValue);
+//   let sum = 0;
+//   for (let symbol of symbols) {
+//     sum += symbol.value;
+//     if (randomNumber < sum) {
+//       if (symbol.symbol === lastSymbol) {
+//         console.log("Símbolo repetido, gerando novo");
+//         return getRandomSymbol();
+//       }
+//       lastSymbol = symbol.symbol;
+//       return symbol.symbol;
+//     }
+    
+//   }
+// }
+
 let spinButton = document.querySelector(".spin-button");
 let symbol = document.querySelector("#symbol");
+let modalResult = document.querySelector("#modalResult");
 
 let sound1 = new Audio("./assets/sounds/random-wheel.wav");
 let sound2 = new Audio("./assets/sounds/win.wav");
@@ -87,6 +156,9 @@ spinButton.addEventListener("click", function () {
       symbol.src = "./assets/img/" + getRandomSymbol() + ".png";
       symbol.parentElement.classList.remove("spin");
       sound2.play();
+
+      // modalResult.textContent = symbol;
+      $("#resultModal").modal("show");
     }
   }, spinInterval);
 });
@@ -106,7 +178,7 @@ slideShowSection.css("display", "none");
 videoStandBySection.css("display", "none");
 
 let timeoutId;
-const seconds = 15000;
+const seconds = 5000;
 
 function setStandbyTimeout() {
   clearTimeout(timeoutId);
@@ -145,6 +217,14 @@ document.addEventListener("click", function (e) {
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "none");
     console.log("VÍDEO DE STANDBY DESATIVADO");
+  }
+
+  if (e.target.id === "modal-close") {
+    defaultSection.css("display", "flex");
+    slotMachineSection.css("display", "none");
+    slideShowSection.css("display", "none");
+    videoStandBySection.css("display", "none");
+    console.log("DEFAULT SECTION ACTIVE");
   }
 
   timeoutId = setTimeout(function () {

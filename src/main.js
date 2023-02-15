@@ -7,15 +7,17 @@ function setDefaultLanguage(language) {
 
 const languages = {
   pt: {
+    mainPageTitle: 'Um click abre muitas portas Nau',
     defaultButtonAbout: "Sobre Nós",
-    defaultButtonPlay: "Jogar",
+    defaultButtonPlay: "Momento Nau",
     slotMachineButton: "Rodar",
     modalButtonClose: "Voltar ao início",
     modalBody: `O símbolo sorteado foi:`
   },
   en: {
+    mainPageTitle: 'Pick you Nau moment of the day',
     defaultButtonAbout: "About Us",
-    defaultButtonPlay: "Play",
+    defaultButtonPlay: "Nau moment",
     slotMachineButton: "Spin",
     modalButtonClose: "Back",
     modalBody: `The symbol drawn was:`
@@ -46,6 +48,7 @@ function changeLanguage(language) {
   // DEFAULT
   $('#play-slide-show').text(languageData.defaultButtonAbout);
   $('#play-game').text(languageData.defaultButtonPlay);
+  $('#phrase-homepage').text(languageData.mainPageTitle);
 
   // SLOT MACHINE
   $('.spin-button').text(languageData.slotMachineButton);
@@ -54,15 +57,15 @@ function changeLanguage(language) {
 }
 
 let symbols = [
-  { symbol: "ball", value: 60 },
-  { symbol: "cards", value: 50 },
-  { symbol: "coin", value: 40 },
-  { symbol: "control", value: 30 },
-  { symbol: "dices", value: 20 },
-  { symbol: "man", value: 10 },
-  { symbol: "roulette", value: 5 },
-  { symbol: "slotmachinecherry", value: 3 },
-  { symbol: "slotmachineseven", value: 1 },
+  { symbol: "ball", value: 60, count: 0, maxCount: 300 },
+  { symbol: "cards", value: 50, count: 0, maxCount: 100 },
+  { symbol: "coin", value: 40, count: 0, maxCount: 100 },
+  { symbol: "control", value: 30, count: 0, maxCount: 50 },
+  { symbol: "dices", value: 20, count: 0, maxCount: 50 },
+  { symbol: "man", value: 10, count: 0, maxCount: 40 },
+  { symbol: "roulette", value: 5, count: 0, maxCount: 30 },
+  { symbol: "slotmachinecherry", value: 3, count: 0, maxCount: 20 },
+  { symbol: "slotmachineseven", value: 1, count: 0, maxCount: 10 }
 ];
 
 let totalValue = symbols.reduce((acc, symbol) => acc + symbol.value, 0);
@@ -107,12 +110,15 @@ function getRandomSymbol() {
   let sum = 0;
   for (let symbol of symbols) {
     sum += symbol.value;
-    if (randomNumber < sum) {
-      console.log("symbol:", symbol);
+    if (randomNumber < sum && symbol.count < symbol.maxCount) {
+      console.log("symbol:", symbol.symbol);
+      symbol.count++; // incrementa o contador para esse símbolo
+      console.log(symbol.count);
       return symbol.symbol;
     }
-    // console.log("lastSymbol:", lastSymbol);
   }
+  // Se todos os símbolos já foram sorteados o número máximo de vezes, retorna null
+  getRandomSymbol();
 }
 
 
@@ -178,7 +184,7 @@ slideShowSection.css("display", "none");
 videoStandBySection.css("display", "none");
 
 let timeoutId;
-const seconds = 5000;
+const seconds = 5000000;
 
 function setStandbyTimeout() {
   clearTimeout(timeoutId);

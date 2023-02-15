@@ -10,6 +10,9 @@
       href="./src/bootstrap/css/bootstrap.min.css"
     />
     <link rel="stylesheet" type="text/css" href="./src/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <script src="./src/jquery/jquery-3.6.1.min.js"></script>
     <script src="./src/bootstrap/js/bootstrap.min.js"></script>
     <script defer src="./src/main.js"></script>
@@ -19,20 +22,29 @@
     <!-- MAIN/CHOICES SECTION -->
 
     <section id="default">
-      <div class="row d-inline-block">
-        <div class="col-12">
-          <span id="pt-button">PT</span>
-          <span id="en-button">EN</span>
+      <div id="homepage-container">
+        <img src="./assets/img/logo-homepage.png" alt="logo" class="logo-homepage">
+        <div class="row">
+          <div class="col-lg-12 justify-content-center d-flex">
+            <div class="button-default-section" id="play-slide-show"></div>
+          </div>
+          <div class="col-lg-12 justify-content-center d-flex">
+            <div class="button-default-section" id="play-game" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <div class="button-default-section" id="play-slide-show"></div>
+        <div class="row">
+          <div class="col-lg-12" id="phrase-homepage"></div>
         </div>
-        <div class="col-6">
-          <div class="button-default-section" id="play-game" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></div>
+        <div class="row">
+          <div class="col-lg-12">
+            <span id="pt-button">
+              <img src="./assets/img/pt-icon-homepage.png" class="icon-language" alt="">
+            </span>
+            <span id="en-button">
+              <img src="./assets/img/en-icon-homepage.png" class="icon-language" alt="">
+            </span>
+          </div>
         </div>
-
       </div>
     </section>
 

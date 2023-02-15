@@ -10,17 +10,21 @@ const languages = {
     mainPageTitle: 'Um click abre muitas portas Nau',
     defaultButtonAbout: "Sobre Nós",
     defaultButtonPlay: "Momento Nau",
+
+    gamePageTitle: 'Levando a felicidade ao convidado',
     slotMachineButton: "Rodar",
-    modalButtonClose: "Voltar ao início",
-    modalBody: `O símbolo sorteado foi:`
+    modalTitle: 'Parabéns, você ganhou! 🎉',
+    modalTextEnd: 'Um colega irá encaminhar o seu brinde até si!'
   },
   en: {
     mainPageTitle: 'Pick you Nau moment of the day',
     defaultButtonAbout: "About Us",
     defaultButtonPlay: "Nau moment",
+
+    gamePageTitle: 'Leading guest happiness',
     slotMachineButton: "Spin",
-    modalButtonClose: "Back",
-    modalBody: `The symbol drawn was:`
+    modalTitle: 'Congratulations, you win! 🎉',
+    modalTextEnd: 'A colege will now forward to your prize'
   }
 }
 
@@ -51,9 +55,12 @@ function changeLanguage(language) {
   $('#phrase-homepage').text(languageData.mainPageTitle);
 
   // SLOT MACHINE
+  $('#phrase-game').text(languageData.gamePageTitle);
   $('.spin-button').text(languageData.slotMachineButton);
   $('#modal-close').text(languageData.modalButtonClose);
-  $('.modal-body').text(languageData.modalBody);
+  $('.modal-result-title').text(languageData.modalTitle);
+  // $('.modal-body').text(languageData.modalBody);
+  $('.modal-result-text').text(languageData.modalTextEnd);
 }
 
 let symbols = [
@@ -178,9 +185,9 @@ const defaultSection = $("#default");
 const slideShowSection = $("#slide-show");
 const videoStandBySection = $("#video-standby");
 
-slotMachineSection.css("display", "none");
+slotMachineSection.css("display", "flex");
 defaultSection.css("display", "flex");
-slideShowSection.css("display", "none");
+slideShowSection.css("display", "flex");
 videoStandBySection.css("display", "none");
 
 let timeoutId;
@@ -244,6 +251,14 @@ document.addEventListener("click", function (e) {
 
   setStandbyTimeout();
 });
+
+$('.close-game').on('click', function () {
+  slotMachineSection.css("display", "none");
+  defaultSection.css("display", "block");
+  slideShowSection.css("display", "none");
+  videoStandBySection.css("display", "none");
+  console.log("BOTÃO DE FECHAR JOGO CLICADO");
+})
 
 // SLIDESHOW
 

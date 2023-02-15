@@ -21,7 +21,7 @@
   <body>
     <!-- MAIN/CHOICES SECTION -->
 
-    <section id="default">
+    <!-- <section id="default">
       <div id="homepage-container">
         <img src="./assets/img/logo-homepage.png" alt="logo" class="logo-homepage">
         <div class="row">
@@ -46,38 +46,44 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- SLOT MACHINE SECTION  -->
 
     <section id="slot-machine">
+
+      <nav>
+        <img src="./assets/img/logo-game.png" class="logo-game">
+        <img src="./assets/img/close-game.png" class="close-game">
+      </nav>
+
       <!-- Modal -->
-      <div
-        class="modal fade"
-        id="resultModal"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="resultModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
+      <div class="modal fade" id="resultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
           <div class="modal-content">
+            <div class="modal-header">
+              <img src="./assets/img/logo-game.png" class="logo-game">
+              <img src="./assets/img/close-game.png" class="close-game" data-bs-dismiss="modal" id="modal-close">
+            </div>
             <div class="modal-body">
-              <span id="modalResult"></span>
+              <p class="modal-result-title"></p>
+              <div id="modal-result-icon"></div>
+              <p class="modal-result-text"></p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal-close"></button>
-            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" ></button>
+            </div> -->
           </div>
         </div>
       </div>
 
-      <div class="slot">
-        <img src="./assets/img/default.png" id="symbol" />
+      <div id="slot-machine-container">
+        <p id="phrase-game"></p>
+        <div class="slot">
+          <img src="./assets/img/towel.png" id="symbol" />
+        </div>
+          <button class="spin-button"></button>
       </div>
-      <button class="spin-button"></button>
     </section>
 
     <!-- SLIDE SHOW SECTION  -->

@@ -25,7 +25,7 @@ body {
 }
 
 .logo-homepage {
-    width: 684px;
+    width: 100%;
     height: 330px;
     object-fit: cover;
     margin-bottom: 158px;
@@ -74,19 +74,60 @@ body {
 /* SLOT MACHINE SECTION  */
 
 #slot-machine {
-    display: flex;
-    justify-content: center;
     height: 100%;
     align-items: center;
     flex-direction: column;
+    background-color: rgba(182, 156, 123, 0.4);
+}
+
+#slot-machine nav {
+    background-color: #FFF;
+    height: 120px;
+    width: 100%;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 42px;
+}
+
+nav .logo-game {
+    width: 216px;
+    height: 104px;
+}
+
+nav .close-game {
+    width: 22.5px;
+    height: 22.5px;
+    margin-right: 1em;;
+}
+
+#slot-machine #slot-machine-container {
+    padding: 224px 207px 124px 207px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#slot-machine-container #phrase-game {
+    font-weight: 400;
+    color: #FFF;
+    text-shadow: 0px 4px 30px #897966;
+    font-size: 60px;
+    line-height: 73px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 252px;
 }
 
 .slot {
-    height: 30em;
-    width: 30em;
+    height: 656px;
+    width: 656px;
     overflow: hidden;
     position: relative;
     border: none;
+    margin-bottom: 226px;
 }
 
 .slot #symbol {
@@ -95,7 +136,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 .spin {
@@ -103,9 +143,52 @@ body {
 }
 
 .spin-button {
-    padding: 1em;
-    border-radius: 0.5em;
+    width: 666px;
+    height: 173px;
+    padding: 59px 265px;
     font-size: 1.5em;
+    text-transform: uppercase;
+    background-color: #FFF;
+    box-shadow: 0px 4px 70px rgba(61, 44, 0, 0.3);
+    border: none;
+    color: rgba(137, 121, 102, 1);
+    font-size: 55px;
+    line-height: 67px;
+}
+
+/* MODAL  */
+
+.modal-header {
+    padding: 0 42px;
+    height: 120px !important;
+}
+
+.modal-body {
+    background-image: url(../assets/img/bg-modal.png);
+    background-color: rgba(182, 156, 123, 0.5);
+    height: 100%;
+    padding: 176px 132px 190px 132px;
+}
+
+.modal-body .modal-result-title {
+    font-size: 64px;
+    line-height: 78px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 30px #897966;
+    text-transform: uppercase;
+    margin-bottom: 160px;
+}
+
+.modal-body .modal-result-text {
+    font-size: 48px;
+    line-height: 59px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 30px #897966;
+    text-transform: uppercase;
+    margin-top: 167px;
+    text-align: center;
 }
 
 

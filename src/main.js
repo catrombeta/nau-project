@@ -11,6 +11,9 @@ const languages = {
     defaultButtonAbout: "Sobre Nós",
     defaultButtonPlay: "Momento Nau",
 
+    transitionSectionTitle: 'Se tem play, tem diversão Nau',
+    transitionSectionDescription: 'Vamos Jogar!',
+
     gamePageTitle: 'Levando a felicidade ao convidado',
     slotMachineButton: "Rodar",
     modalTitle: 'Parabéns, você ganhou! 🎉',
@@ -20,6 +23,9 @@ const languages = {
     mainPageTitle: 'Pick you Nau moment of the day',
     defaultButtonAbout: "About Us",
     defaultButtonPlay: "Nau moment",
+
+    transitionSectionTitle: 'Take a chance, play to win!',
+    transitionSectionDescription: 'Are you a Nau player?',
 
     gamePageTitle: 'Leading guest happiness',
     slotMachineButton: "Spin",
@@ -54,58 +60,62 @@ function changeLanguage(language) {
   $('#play-game').text(languageData.defaultButtonPlay);
   $('#phrase-homepage').text(languageData.mainPageTitle);
 
+  // TRANSITION
+  $('.transition-title').text(languageData.transitionSectionTitle);
+  $('.transition-description').text(languageData.transitionSectionDescription);
+
   // SLOT MACHINE
   $('#phrase-game').text(languageData.gamePageTitle);
   $('.spin-button').text(languageData.slotMachineButton);
   $('#modal-close').text(languageData.modalButtonClose);
   $('.modal-result-title').text(languageData.modalTitle);
-  // $('.modal-body').text(languageData.modalBody);
   $('.modal-result-text').text(languageData.modalTextEnd);
 }
 
 let symbols = [
-  { symbol: "ball", value: 60, count: 0, maxCount: 300 },
-  { symbol: "cards", value: 50, count: 0, maxCount: 100 },
-  { symbol: "coin", value: 40, count: 0, maxCount: 100 },
-  { symbol: "control", value: 30, count: 0, maxCount: 50 },
-  { symbol: "dices", value: 20, count: 0, maxCount: 50 },
-  { symbol: "man", value: 10, count: 0, maxCount: 40 },
-  { symbol: "roulette", value: 5, count: 0, maxCount: 30 },
-  { symbol: "slotmachinecherry", value: 3, count: 0, maxCount: 20 },
-  { symbol: "slotmachineseven", value: 1, count: 0, maxCount: 10 }
+  { symbol: "postit", value: 300, count: 0, maxCount: 300 },
+  { symbol: "pen", value: 200, count: 0, maxCount: 100 },
+  { symbol: "travelKit", value: 120, count: 0, maxCount: 100 },
+  { symbol: "hat", value: 60, count: 0, maxCount: 50 },
+  { symbol: "pencil", value: 50, count: 0, maxCount: 50 },
+  { symbol: "book", value: 40, count: 0, maxCount: 40 },
+  { symbol: "blanket", value: 30, count: 0, maxCount: 30 },
+  { symbol: "powerbank", value: 20, count: 0, maxCount: 20 },
+  { symbol: "towel", value: 10, count: 0, maxCount: 10 }
 ];
 
 let totalValue = symbols.reduce((acc, symbol) => acc + symbol.value, 0);
 
 // SIMULAÇÃO DE PROBABILIDADES
 
-// let symbolCount = {};
-// for (let symbol of symbols) {
-//   symbolCount[symbol.symbol] = 0;
-// }
+let symbolCount = {};
+for (let symbol of symbols) {
+  symbolCount[symbol.symbol] = 0;
+}
 
-// let numberOfSimulations = 500;
+let numberOfSimulations = 500;
 
-// for (let i = 0; i < numberOfSimulations; i++) {
-//   let randomNumber = Math.floor(Math.random() * totalValue);
-//   let sum = 0;
-//   for (let symbol of symbols) {
-//     sum += symbol.value;
-//     if (randomNumber < sum) {
-//       symbolCount[symbol.symbol]++;
-//       break;
-//     }
-//   }
-// }
+for (let i = 0; i < numberOfSimulations; i++) {
+  let randomNumber = Math.floor(Math.random() * totalValue);
+  let sum = 0;
+  for (let symbol of symbols) {
+    sum += symbol.value;
+    if (randomNumber < sum) {
+      symbolCount[symbol.symbol]++;
+      break;
+    }
+  }
+}
 
-// for (let symbol of symbols) {
-//   let probability = symbolCount[symbol.symbol] / numberOfSimulations;
-//   console.log(`A probabilidade de ganhar o símbolo ${symbol.symbol} é de ${probability}.`);
-// }
+for (let symbol of symbols) {
+  let probability = symbolCount[symbol.symbol] / numberOfSimulations;
+  console.log(`A probabilidade de ganhar o símbolo ${symbol.symbol} é de ${probability}.`);
+}
 
 // FIM DA SIMULAÇÃO DE PROBABILIDADES
 
 let lastSymbol;
+let result;
 
 function getRandomSymbolForSpinning() {
   let randomNumber = Math.floor(Math.random() * totalValue);
@@ -121,30 +131,14 @@ function getRandomSymbol() {
       console.log("symbol:", symbol.symbol);
       symbol.count++; // incrementa o contador para esse símbolo
       console.log(symbol.count);
-      return symbol.symbol;
+      result = symbol.symbol; // armazena o resultado do sorteio na variável global 'result'
+      $("#modal-result-icon").html(`<img src="./assets/img/${result}.png" class="modal-result-symbol">`);
+      return result;
     }
   }
-  // Se todos os símbolos já foram sorteados o número máximo de vezes, retorna null
+  // Se todos os símbolos já foram sorteados o número máximo de vezes, a roleta rodará novamente
   getRandomSymbol();
 }
-
-
-// function getRandomSymbol() {
-//   let randomNumber = Math.floor(Math.random() * totalValue);
-//   let sum = 0;
-//   for (let symbol of symbols) {
-//     sum += symbol.value;
-//     if (randomNumber < sum) {
-//       if (symbol.symbol === lastSymbol) {
-//         console.log("Símbolo repetido, gerando novo");
-//         return getRandomSymbol();
-//       }
-//       lastSymbol = symbol.symbol;
-//       return symbol.symbol;
-//     }
-    
-//   }
-// }
 
 let spinButton = document.querySelector(".spin-button");
 let symbol = document.querySelector("#symbol");
@@ -152,6 +146,7 @@ let modalResult = document.querySelector("#modalResult");
 
 let sound1 = new Audio("./assets/sounds/random-wheel.wav");
 let sound2 = new Audio("./assets/sounds/win.wav");
+
 
 spinButton.addEventListener("click", function () {
   symbol.parentElement.classList.add("spin");
@@ -176,6 +171,7 @@ spinButton.addEventListener("click", function () {
   }, spinInterval);
 });
 
+
 // SET SECTIONS
 
 const buttonPlay = $("#play-game");
@@ -184,11 +180,21 @@ const slotMachineSection = $("#slot-machine");
 const defaultSection = $("#default");
 const slideShowSection = $("#slide-show");
 const videoStandBySection = $("#video-standby");
+const transitionSection = $('#transition-section');
 
-slotMachineSection.css("display", "flex");
-defaultSection.css("display", "flex");
-slideShowSection.css("display", "flex");
+slotMachineSection.css("display", "none");
+defaultSection.css("display", "block");
+slideShowSection.css("display", "none");
 videoStandBySection.css("display", "none");
+transitionSection.css("display", "none");
+
+function resetSymbol() {
+  if ($('#symbol').attr('src', './assets/img/logo-homepage.png')) {
+  }
+  if (slotMachineSection.css("display") == "none") {
+    $('#symbol').attr('src', './assets/img/logo-homepage.png');
+  }
+}
 
 let timeoutId;
 const seconds = 5000000;
@@ -204,15 +210,27 @@ function setStandbyTimeout() {
   }, seconds);
 }
 
+const transitionTime = 3000;
+
 document.addEventListener("click", function (e) {
   clearTimeout(timeoutId);
 
   if (e.target.id === "play-game") {
-    slotMachineSection.css("display", "flex");
+    transitionSection.css("display", "none");
     defaultSection.css("display", "none");
-    slideShowSection.css("display", "none");
-    videoStandBySection.css("display", "none");
-    console.log("BOTÃO DE JOGO CLICADO");
+    transitionSection.fadeIn(1000);
+    setTimeout(function() {
+      slotMachineSection.css("display", "flex");
+      slideShowSection.css("display", "none");
+      videoStandBySection.css("display", "none");
+      transitionSection.fadeOut({
+        duration: 1000,
+        complete: function() {
+          $("#background-transition").css("background-color", "#0000");
+        }
+      });
+      console.log("BOTÃO DE JOGO CLICADO");
+    }, transitionTime);
   }
 
   if (e.target.id === "play-slide-show") {
@@ -221,6 +239,7 @@ document.addEventListener("click", function (e) {
     slideShowSection.css("display", "block");
     createCarouselItem();
     videoStandBySection.css("display", "none");
+    resetSymbol();
     console.log("SLIDESHOW ATIVADO");
   }
 
@@ -229,6 +248,7 @@ document.addEventListener("click", function (e) {
     slotMachineSection.css("display", "none");
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "none");
+    resetSymbol();
     console.log("VÍDEO DE STANDBY DESATIVADO");
   }
 
@@ -237,6 +257,7 @@ document.addEventListener("click", function (e) {
     slotMachineSection.css("display", "none");
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "none");
+    resetSymbol();
     console.log("DEFAULT SECTION ACTIVE");
   }
 
@@ -245,6 +266,7 @@ document.addEventListener("click", function (e) {
     defaultSection.css("display", "none");
     slideShowSection.css("display", "none");
     videoStandBySection.css("display", "block");
+    resetSymbol();
     console.log("VÍDEO DE STANDBY ATIVADO");
   }, seconds);
 
@@ -257,8 +279,10 @@ $('.close-game').on('click', function () {
   defaultSection.css("display", "block");
   slideShowSection.css("display", "none");
   videoStandBySection.css("display", "none");
+  resetSymbol();
   console.log("BOTÃO DE FECHAR JOGO CLICADO");
 })
+
 
 // SLIDESHOW
 
@@ -284,32 +308,3 @@ function createCarouselItem() {
     $(".carousel-item").first().addClass("active");
   }
 }
-
-// BUTTON CLOSE
-
-let buttonClose = $(".button-close");
-
-// $(buttonClose).on('click', function() {
-//   if (buttonClose)
-// })
-
-// STANDBY
-
-// $(document).ready(function() {
-//   var timeoutId;
-//   var video = $("#standby-video")[0];
-
-//   function resetTimer() {
-//     clearTimeout(timeoutId);
-//     timeoutId = setTimeout(function() {
-//       video.play();
-//     }, 3000); // 5 minutos em milissegundos
-//   }
-
-//   $(document).mousemove(resetTimer);
-
-//   video.addEventListener("ended", function() {
-//     this.currentTime = 0;
-//     this.pause();
-//   });
-// });

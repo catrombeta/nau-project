@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="./src/bootstrap/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" type="text/css" href="./src/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="./src/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +15,10 @@
     <title>Slot Machine</title>
   </head>
   <body>
+
     <!-- MAIN/CHOICES SECTION -->
 
-    <!-- <section id="default">
+    <section id="default">
       <div id="homepage-container">
         <img src="./assets/img/logo-homepage.png" alt="logo" class="logo-homepage">
         <div class="row">
@@ -46,7 +43,21 @@
           </div>
         </div>
       </div>
-    </section> -->
+    </section>
+
+    <!-- TRANSITION BACKGROUND  -->
+
+    <div id="background-transition"></div>
+
+    <!-- TRANSITION SECTION -->
+
+    <section id="transition-section">
+      <div id="transition-section-container">
+        <p class="transition-title"></p>
+        <p class="transition-description"></p>
+        <img src="./assets/img/logo-homepage.png">
+      </div>
+    </section>
 
     <!-- SLOT MACHINE SECTION  -->
 
@@ -57,7 +68,6 @@
         <img src="./assets/img/close-game.png" class="close-game">
       </nav>
 
-      <!-- Modal -->
       <div class="modal fade" id="resultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
           <div class="modal-content">
@@ -70,9 +80,6 @@
               <div id="modal-result-icon"></div>
               <p class="modal-result-text"></p>
             </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" ></button>
-            </div> -->
           </div>
         </div>
       </div>
@@ -80,7 +87,7 @@
       <div id="slot-machine-container">
         <p id="phrase-game"></p>
         <div class="slot">
-          <img src="./assets/img/towel.png" id="symbol" />
+          <img src="./assets/img/logo-homepage.png" id="symbol" />
         </div>
           <button class="spin-button"></button>
       </div>
@@ -89,30 +96,24 @@
     <!-- SLIDE SHOW SECTION  -->
 
     <section id="slide-show">
-      <!-- <span><img src="./assets/img/close-button.png" class="closeButton" id="close-button-slide" /></span> -->
-
-      <div id="carouselExample" class="carousel slide carousel-fade h-100">
-        <div class="carousel-inner">
-          <!-- CRIANDO FILHOS A PARTIR DE JS -->
+      <nav>
+        <img src="./assets/img/logo-game.png" class="logo-game">
+        <img src="./assets/img/close-game.png" class="close-game">
+      </nav>
+      <div class="slide-show-container">
+        <div id="carouselExample" class="carousel slide carousel-fade h-100">
+          <div class="carousel-inner">
+            <!-- CRIANDO FILHOS A PARTIR DE JS -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
     </section>
 
